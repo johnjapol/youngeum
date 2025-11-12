@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래식 영화음악 퀴즈</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-number {
+            text-align: center;
+            font-size: 1.3em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .music-player {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            transition: transform 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+        }
+
+        .play-button svg {
+            width: 35px;
+            height: 35px;
+            fill: #667eea;
+        }
+
+        .time-display {
+            color: white;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .volume-slider {
+            width: 150px;
+        }
+
+        .answer-section {
+            margin-top: 20px;
+        }
+
+        .show-answer-btn {
+            width: 100%;
+            padding: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .show-answer-btn:hover {
+            background: #5568d3;
+        }
+
+        .answer-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        .answer-box.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .answer-item {
+            margin-bottom: 15px;
+        }
+
+        .answer-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .answer-value {
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        .next-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .completion-screen {
+            text-align: center;
+            display: none;
+        }
+
+        .completion-screen.show {
+            display: block;
+        }
+
+        .completion-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .completion-message {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .restart-button {
+            padding: 15px 40px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .restart-button:hover {
+            background: #5568d3;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .play-button {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 클래식 영화음악 퀴즈</h1>
+        <p class="subtitle">음악을 듣고 어떤 곡인지 알아맞혀보세요!</p>
+
+        <div class="quiz-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="question-number" id="questionNumber">문제 1 / 32</div>
+
+            <div class="music-player">
+                <button class="play-button" id="playButton">
+                    <svg id="playIcon" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg id="pauseIcon" viewBox="0 0 24 24" style="display: none;">
+                        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                    </svg>
+                </button>
+                <div class="time-display" id="timeDisplay">0:00 / 1:00</div>
+                <div class="volume-control">
+                    <span>🔊</span>
+                    <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider">
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <button class="show-answer-btn" id="showAnswerBtn">답을 보시겠습니까?</button>
+                
+                <div class="answer-box" id="answerBox">
+                    <div class="answer-item">
+                        <div class="answer-label">🎬 영화</div>
+                        <div class="answer-value" id="movieName"></div>
+                    </div>
+                    <div class="answer-item">
+                        <div class="answer-label">🎼 작곡가</div>
+                        <div class="answer-value" id="composer"></div>
+                    </div>
+                    <div class="answer-item">
+                        <div class="answer-label">🎵 곡명</div>
+                        <div class="answer-value" id="musicTitle"></div>
+                    </div>
+                </div>
+
+                <button class="next-button" id="nextButton">다음 문제 →</button>
+            </div>
+        </div>
+
+        <div class="completion-screen" id="completionScreen">
+            <div class="completion-icon">🎉</div>
+            <div class="completion-message">
+                축하합니다!<br>
+                32곡을 모두 들으셨습니다!
+            </div>
+            <button class="restart-button" id="restartButton">처음부터 다시 시작</button>
+        </div>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
