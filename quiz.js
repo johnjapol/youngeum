@@ -82,7 +82,7 @@ const musicData = {
     },
     '17': {
         movie: '샤인',
-        composer: '림스키 코르사코프 (라흐마니노프 편곡)',
+        composer: '림스키 코르샤코프 (라흐마니노프 편곡)',
         title: '왕벌의 비행'
     },
     '18': {
