@@ -1,7 +1,7 @@
 // 음악 정보 데이터베이스
 const musicData = {
     '01': {
-        movie: '2001: 스페이스 오디세이',
+        movie: '2001 스페이스 오디세이',
         composer: 'R. 슈트라우스',
         title: '짜라투스트라는 이렇게 말했다'
     },
@@ -63,7 +63,7 @@ const musicData = {
     '13': {
         movie: '킹스 스피치, 불멸의 연인',
         composer: '베토벤',
-        title: '피아노 협주곡 제5번 "황제"'
+        title: '피아노 협주곡 5번 "황제"'
     },
     '14': {
         movie: '불멸의 연인',
@@ -73,16 +73,16 @@ const musicData = {
     '15': {
         movie: '불멸의 연인',
         composer: '베토벤',
-        title: '교향곡 제3번 "영웅"'
+        title: '교향곡 3번 "영웅"'
     },
     '16': {
         movie: '샤인',
         composer: '리스트',
-        title: '파가니니 연습곡 제3번 - 라 캄파넬라'
+        title: '라캄파넬라'
     },
     '17': {
         movie: '샤인',
-        composer: '림스키 코르샤코프 (라흐마니노프 편곡)',
+        composer: '림스키 코르샤코프',
         title: '왕벌의 비행'
     },
     '18': {
@@ -106,8 +106,8 @@ const musicData = {
         title: '녹턴 C# 마이너'
     },
     '22': {
-        movie: 'E.T.',
-        composer: '존 윌리엄스',
+        movie: 'ET',
+        composer: '존 윌리암스',
         title: '메인 테마'
     },
     '23': {
@@ -138,12 +138,12 @@ const musicData = {
     '28': {
         movie: '불멸의 연인',
         composer: '베토벤',
-        title: '피아노 소나타 14번 "월광"'
+        title: '피아노 소나타 "월광"'
     },
     '29': {
         movie: '빌리 엘리어트',
         composer: '차이코프스키',
-        title: '백조의 호수 - 장면10 백조의 주제'
+        title: '백조의 호수'
     },
     '30': {
         movie: '샤인',
@@ -152,7 +152,7 @@ const musicData = {
     },
     '31': {
         movie: '스타워즈',
-        composer: '존 윌리엄스',
+        composer: '존 윌리암스',
         title: '메인 테마'
     },
     '32': {
